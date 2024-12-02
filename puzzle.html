@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calming Puzzle Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calming Puzzle Game</h1>
+        <p>Arrange the tiles to form a complete sequence. Click on tiles adjacent to the empty space to move them.</p>
+        <div id="puzzle-container">
+            <!-- Puzzle tiles go here -->
+        </div>
+        <button onclick="shufflePuzzle()">Shuffle Puzzle</button>
+    </div>
+
+    <script>
+        const container = document.getElementById("puzzle-container");
+        let tiles = Array.from({ length: 15 }, (_, i) => i + 1).concat([null]); // Array from 1 to 15 with one empty spot
+
+        // Render puzzle tiles on the page
+        function renderPuzzle() {
+            container.innerHTML = '';
+            tiles.forEach(num => {
+                const tile = document.createElement("div");
+                tile.classList.add("tile");
+                if (num) {
+                    tile.textContent = num;
+                    tile.onclick = () => moveTile(num);
+                } else {
+                    tile.classList.add("empty");
+                }
+                container.appendChild(tile);
+            });
+        }
+
+        // Shuffle tiles in random order
+        function shufflePuzzle() {
+            do {
+                tiles = tiles.sort(() => Math.random() - 0.5);
+            } while (!isSolvable());
+            renderPuzzle();
+        }
+
+        // Move tile if adjacent to the empty spot
+        function moveTile(num) {
+            const index = tiles.indexOf(num);
+            const emptyIndex = tiles.indexOf(null);
+            const validMoves = [index - 1, index + 1, index - 4, index + 4]; // Left, right, up, down
+
+            if (validMoves.includes(emptyIndex)) {
+                [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]]; // Swap
+                renderPuzzle();
+                checkWin();
+            }
+        }
+
+        // Check if puzzle is solved
+        function checkWin() {
+            if (tiles.slice(0, 15).every((tile, i) => tile === i + 1)) {
+                alert("Congratulations! You've solved the puzzle!");
+            }
+        }
+
+        // Check puzzle solvability
+        function isSolvable() {
+            const inversions = tiles.reduce((acc, curr, i) => {
+                if (curr === null) return acc;
+                for (let j = i + 1; j < tiles.length; j++) {
+                    if (tiles[j] !== null && tiles[j] < curr) acc++;
+                }
+                return acc;
+            }, 0);
+            const emptyRow = Math.floor(tiles.indexOf(null) / 4);
+            return (inversions + emptyRow) % 2 === 0;
+        }
+
+        // Initial render
+        renderPuzzle();
+    </script>
+</body>
+</html>

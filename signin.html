@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-in</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-text">
+            <h1>Fill in the boxes accordingly to sign-in</h1>
+        </div>
+
+        <div class="form-container">
+            <h2>Sign In</h2>
+            
+            <form id="signInForm" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="username">Full Name:</label>
+                    <input type="text" name="username" id="myusername" placeholder="Last, First, Middle Initial" required>
+                </div>
+                <div class="form-group">
+                    <label for="grade-section">Grade and Section:</label>
+                    <input type="text" name="grade-section" id="grade-section" placeholder="# - Section" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" placeholder="example@gmail.com" required>
+                </div>
+                <div class="form-problem">
+                    <label for="problem">Problem experiencing</label>
+                    <select id="problem" name="problem">
+                        <option value="academic pressure">Academic pressure</option>
+                        <option value="stress">Stress</option>
+                        <option value="anxiety">Anxiety</option>
+                        <option value="depression">Depression</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="recovering">Recovering/Stable condition</label>
+                    <input type="radio" id="recovering" value="recovering" name="status" required>
+                    <label for="already recovered">Already recovered</label>
+                    <input type="radio" id="recovered" value="recovered" name="status" required>
+                    <label for="level">Moderate level</label>
+                    <input type="radio" id="moderate" value="moderate" name="status" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

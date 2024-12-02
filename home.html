@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="welcome-container">
+        <h1 id="greeting">We are so glad that you are here,</h1>
+
+        <p>We Care wants to provide help to those students experiencing problems, come join us discover many this about mental health and how to be mentally healthy. (Medical) Advices and treatments are given to these mental health issues that are common to students. Hope this website helps you to have a more positive mind set as you travel your journey.</p>
+
+        <a href="moodscale.html">Scale your mood</a>
+
+        <div class="info-boxes">
+            <div class="box" onclick="navigateTo('academic.html')">
+                <h2>Academic Pressure</h2>
+                <p>Learn to manage and overcome the pressure associated with academic expectations and workloads.</p>
+            </div>
+            <div class="box" onclick="navigateTo('stress.html')">
+                <h2>Stress</h2>
+                <p>Discover techniques to relieve stress through mindfulness, time management, and relaxation exercises.</p>
+            </div>
+            <div class="box" onclick="navigateTo('depression.html')">
+                <h2>Depression</h2>
+                <p>Find resources and support to help cope with feelings of sadness and hopelessness.</p>
+            </div>
+            <div class="box" onclick="navigateTo('anxiety.html')">
+                <h2>Anxiety</h2>
+                <p>Explore ways to reduce anxiety and build resilience for a calmer mindset.</p>
+            </div>
+        </div>
+
+        <div class="icon-bar">
+            <div class="icon" onclick="openChat()">
+                <i class="fas fa-comments icon-fa"></i>
+                <p>Chat</p>
+            </div>
+
+            <div class="icon" onclick="openBible()">
+                <i class="fas fa-book-open icon-fa"></i>
+                <p>Bible</p>
+            </div>
+
+            <div class="icon" onclick="openPuzzle()">
+                <i class="fas fa-puzzle-piece icon-fa"></i>
+                <p>Puzzle</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingScreen" class="loading-screen">
+        <p id="loadingQuote"></p>
+    </div>
+
+    <script>
+        document.getElementById("greeting").innerText += " " + localStorage.getItem("myusername") + "!";
+
+        function navigateTo(page) {
+            showLoadingScreen();
+            setTimeout(() => {
+                window.location.href = page;
+            }, 2000);
+        }
+
+        function openChat() {
+            alert("Chat function coming soon!");
+        }
+
+        function openBible() {
+            window.open("https://www.bible.com", "_blank");
+        }
+
+        function openPuzzle() {
+            window.location.href = "puzzle.html";
+        }
+
+        const quotes = [
+            "Believe in yourself and all that you are.",
+            "Every day may not be good, but there's something good in every day.",
+            "Mental health is not a destination but a process.",
+            "Peace begins with a smile.",
+            "Caring for the mind is as important as caring for the body."
+        ];
+
+        function showLoadingScreen() {
+            const loadingScreen = document.getElementById("loadingScreen");
+            const loadingQuote = document.getElementById("loadingQuote");
+            loadingQuote.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+            loadingScreen.style.display = "flex";
+        }
+
+        window.addEventListener("load", () => {
+            document.getElementById("loadingScreen").style.display = "none";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Scale</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mood-scale-container">
+        <h1>Mood Scale</h1>
+        <input type="range" id="moodScale" min="0" max="100" value="50" class="slider">
+        <div class="percentage">
+            <span id="moodValue">50%</span>
+        </div>
+        <div class="advice">
+            <p id="adviceText">You're doing okay! Keep it up!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
